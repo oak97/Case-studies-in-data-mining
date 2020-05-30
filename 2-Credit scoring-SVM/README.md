@@ -48,7 +48,7 @@ $ tree
 
   区别在于前者在具体实现时SMO部分的子问题的外层循环$\alpha_1$选取方式做了简化。
 
-求解的对偶问题如下，用SMO算法启发式地求出变量$\alpha$的最优解$\alpha^*$。
+求解的对偶问题如下，用SMO算法启发式地求出变量$\alpha$的最优解$\alpha^\*$。
 $$
 \begin{aligned}
 &\min_{\alpha} \quad \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)-\sum_{i=1}^{N} \alpha_{i} \\
@@ -57,11 +57,11 @@ $$
 \end{aligned}
 $$
 
-然后求出原问题的最优解$w^*$和$b^*$，然后预测样本$x$标签为$f(x)=\operatorname{sign}\left(w^{*} \cdot x+b^{*}\right)$。
+然后求出原问题的最优解$w^\*$和$b^\*$，然后预测样本$x$标签为$f(x)=\operatorname{sign}\left(w^{\*} \cdot x+b^{\*}\right)$。
 
 - `smo_platt_with_kernel.py`用了对偶、拉格朗日松弛，带核函数。
 
-求解的对偶问题如下，用SMO算法启发式地求出对偶问题的最优解$w^*$，然后求出原问题的最优解$b^*$，然后预测样本$x$标签为$f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{*} y_{i} K\left(x, x_{i}\right)+b^{*}\right)$。
+求解的对偶问题如下，用SMO算法启发式地求出对偶问题的最优解$w^\*$，然后求出原问题的最优解$b^\*$，然后预测样本$x$标签为$f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{\*} y_{i} K\left(x, x_{i}\right)+b^{\*}\right)$。
 
 $$
 \begin{aligned}
