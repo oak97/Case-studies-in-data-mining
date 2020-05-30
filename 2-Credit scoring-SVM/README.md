@@ -62,10 +62,9 @@ $$
 - `smo_platt_with_kernel.py`用了对偶、拉格朗日松弛，带核函数。
 
 求解的对偶问题如下，用SMO算法启发式地求出对偶问题的最优解$w^\*$，然后求出原问题的最优解$b^\*$，然后预测样本$x$标签为$f(x)=\operatorname{sign}\left(\sum_{i=1}^{N} \alpha_{i}^{\*} y_{i} K\left(x, x_{i}\right)+b^{\*}\right)$。
-
 $$
 \begin{aligned}
-&\min _{\alpha} \quad  \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j} K\left(x_{i}, x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}\\
+&\min_{\alpha} \quad  \frac{1}{2} \sum_{i=1}^{N} \sum_{j=1}^{N} \alpha_{i} \alpha_{j} y_{i} y_{j} K\left(x_{i}, x_{j}\right)-\sum_{i=1}^{N} \alpha_{i}\\
 &\text { s.t. } \quad \sum_{i=1}^{N} \alpha_{i} y_{i}=0\\
 & \quad  \quad  \quad 0 \leqslant \alpha_{i} \leqslant C, \quad i=1,2, \cdots, N
 \end{aligned}
