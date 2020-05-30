@@ -1,18 +1,4 @@
----
-typora-root-url: ./result
----
-
-[TOC]
-
 ### 一  文件介绍
-
-MG1915027卢文婷（基于用户的协同过滤方法）
-
-MG1915010步纤屿（基于物品的协同过滤方法）
-
-MG1915046朱倩雯（基于加权二部图的SlopeOne方法）
-
-文档由三人共同完成
 
 ```shell
 ├── data（原始数据）
@@ -46,7 +32,7 @@ MG1915046朱倩雯（基于加权二部图的SlopeOne方法）
 
   下图（来源：[1]）构建了物品-用户的加权二部图，权重是评分，资源a、b、c、d从物品方形先传到用户圆形部分，然后再传回物品方形部分，传播过程中是按照权重来分配资源的，如物品$i_1$的初始资源$a$，因为只有两条边$i_i-u_1$和$i_1-u_2$，再结合边的权重关系，最终2/5a传到$u_1$，3/5a传到$u_2$。经过两次传播，我们可以得到物品内部之间的贡献关系，例如$i_1$的a=47a/150+b/5+c/3+47d/270，那么b、c、d对a的贡献分别是1/5、1/3、47/270，利用这个思路来求当前待预测用户已打分电影们对待预测电影的贡献，并在最后求均值时用上。我们发现这个思路其实和物品相似矩阵很相似。
 
-  ![paper](/paper.png)
+  ![paper](https://github.com/oak97/Case-studies-in-data-mining/tree/master/3-Recommendation%20system-Slope%20One%20based%20on%20weighted%20bipartite%20graph/result/paper.png)
 
   下面的公式求出通过加权二部图资源分配得到的当前集合中已打分电影$j$对待预测电影$i$的贡献程度，其中$U$表示同时给两部电影$i$和$j$评过分的用户集合，$r_{ui}$表示连接节点$u$和$i$的边的权重，$\operatorname{deg}(j)$表示节点$j$的度。
   $$
@@ -219,6 +205,7 @@ MG1915046朱倩雯（基于加权二部图的SlopeOne方法）
 | 原始SlopeOne + 加权二部图 + 用户相似矩阵对一开始的单个电影加权 | 0.64983     | pred2       |
 | 原始SlopeOne + 加权二部图 + 预测值调整为0.5-5.0步长为0.5的数值 | **0.63841** | pred3       |
 
+
 预测效果最好的是原始SlopeOne + 加权二部图对最后一步的电影贡献加权 + 预测值调整为0.5-5.0步长为0.5的数值的方法，MAE=0.63841。出人意料的是，在原始SlopeOne+ 加权二部图基础上，加上用户相似矩阵对一开始的单个电影加权，几乎没有效果，经过观察，发现权重系数都较小，我们觉得可能因为这是早期优化，作用被稀疏了。
 
 #### 2  预测结果残差分析
@@ -227,13 +214,13 @@ MG1915046朱倩雯（基于加权二部图的SlopeOne方法）
 
 如果在1.5~4之间的各个预测值上，残差=0的上下分布数量基本一致，形状也是在y=0上下正态分布，那就说明效果较好。从下图中的第一幅子图中我们可以明显看出，1.5~4之间的各个预测值上残差分布均匀，效果较好。
 
-![Residuals_Predicted](/Residuals_Predicted.png)
+![Residuals_Predicted](https://github.com/oak97/Case-studies-in-data-mining/tree/master/3-Recommendation%20system-Slope%20One%20based%20on%20weighted%20bipartite%20graph/result/Residuals_Predicted.png)
 
 下图也是预测评分的残差结果，不过横坐标是真实值，其他说明和上图一致。可以看出，真实值为2.5的电影，样本残差更多是正数，说明预测不准是因为预测大了，如预测成了4。平行四边形中，点的聚集，随着真实值的增大而在与平行四边形的长边保持平行的同时，在往上浮，举例来说，真实值为1的样本的残差不是围绕0分布，而是围绕2分布；真实值为4的样本的残差大致是围绕-0.5分布，更接近0。
 
 虽然真实评分较小时，残差容易是正数，真实评分较大时，残差容易是负数，但是真实评分较小时的残差偏离程度比较大时要大，偏离的更厉害。也就是说，**我们这些算法对真实评分较小的样本预测可能需要调整，要预测的更小些**，因为我们容易把真实值为1的电影打成值为3，说明可能学习的还不够。
 
-![Residuals_True](/Residuals_True.png)
+![Residuals_True](https://github.com/oak97/Case-studies-in-data-mining/tree/master/3-Recommendation%20system-Slope%20One%20based%20on%20weighted%20bipartite%20graph/result/Residuals_True.png)
 
 ####3  总结和后续改进
 
