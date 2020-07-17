@@ -1,7 +1,5 @@
 ### 带时间窗保护机制的Conformal Anomaly Detector
 
-
-
 项目结构：
 
 ```shell
@@ -208,7 +206,7 @@ test_stationarity(data, freqs[csv_i], names[csv_i])
 
 下图是1号数据decomposition的结果示例，因为最终只有1号数据进行平稳预处理后得分有变好，所以这里只展示1号数据。
 
-![1 Decomposition](./result/pics/Decomposition/1 Decomposition.png)
+![1 Decomposition](./result/pics/Decomposition/1%20Decomposition.png)
 
 测试平稳效果的函数，结果是都通过了检验。
 
@@ -243,13 +241,13 @@ def test_stationarity(data, window_num, name):
 
 下图是4个数据的平稳性检测结果，结论在图中右侧用文字标出，都通过了检验。
 
-![1 First Difference](./result/pics/Diffed/1 First Difference.png)
+![1 First Difference](./result/pics/Diffed/1%20First%20Difference.png)
 
-![2 First Difference](./result/pics/Diffed/2 First Difference.png)
+![2 First Difference](./result/pics/Diffed/2%20First%20Difference.png)
 
-![3 First Difference](./result/pics/Diffed/3 First Difference.png)
+![3 First Difference](./result/pics/Diffed/3%20First%20Difference.png)
 
-![4 First Difference](./result/pics/Diffed/4 First Difference.png)
+![4 First Difference](./result/pics/Diffed/4%20First%20Difference.png)
 
 那么，我们在用带时间窗保护机制的Conformal Anomaly Detector算法时，分别尝试使用平稳前和平稳后的数据。
 
@@ -420,7 +418,7 @@ if __name__ == '__main__':
 
 
 
-###4  总结
+### 4  总结
 
 - 不同方法，没有最好，只有合适
 - 调参对效果影响大
