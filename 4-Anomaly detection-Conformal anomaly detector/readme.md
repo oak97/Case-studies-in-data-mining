@@ -3,52 +3,28 @@
 项目结构：
 
 ```shell
-├── alg（算法核心实现）
+├── alg # 算法核心实现
 │   └── conformal_anomaly_detector.py
-├── data（源数据文件）
+├── data # 源数据文件
 │   ├── htmjava_TravelTime_387_withlabel.csv
 │   ├── htmjava_TravelTime_451_withlabel.csv
 │   ├── htmjava_speed_7578_withlabel.csv
 │   ├── htmjava_speed_t4013_withlabel.csv
-│   └── preprocessed（平稳处理后的数据文件）
-│       ├── 1 preprocessed.csv
-│       ├── 2 preprocessed.csv
-│       ├── 3 preprocessed.csv
-│       └── 4 preprocessed.csv
-├── model（代码）
-│   ├── analysis.py（分析实验结果）
-│   ├── explore.ipynb（探索性分析）
-│   ├── model.py（总入口）
-│   └── preprocess.py（平稳处理）
-├── readme.md（本说明文档）
-├── result（生成的结果文件）
-│   ├── mse_False.csv（mse得分结果，False表示不加平稳）
-│   ├── mse_True.csv（mse得分结果，True表示加平稳）
-│   ├── pics（所有图片结果文件）
-│   │   ├── Decomposition（做季节性分解的图片结果）
-│   │   │   ├── 1 Decomposition.png
-│   │   │   ├── 2 Decomposition.png
-│   │   │   ├── 3 Decomposition.png
-│   │   │   └── 4 Decomposition.png
-│   │   ├── Diffed（做一阶差分平稳的图片结果）
-│   │   │   ├── 1 First Difference.png
-│   │   │   ├── 2 First Difference.png
-│   │   │   ├── 3 First Difference.png
-│   │   │   └── 4 First Difference.png
-│   │   └── Predict（预测效果图片）
-│   │       ├── 1.png
-│   │       ├── 2.png
-│   │       ├── 3.png
-│   │       └── 4.png
-│   └── pred（预测结果，False表示不加平稳，True表示加）
-│       ├── 1_pred_False.csv
-│       ├── 1_pred_True.csv
-│       ├── 2_pred_False.csv
-│       ├── 2_pred_True.csv
-│       ├── 3_pred_False.csv
-│       ├── 3_pred_True.csv
-│       ├── 4_pred_False.csv
-│       └── 4_pred_True.csv
+│   └── preprocessed/ # 平稳处理后的数据文件
+├── model # 代码
+│   ├── analysis.py # 分析实验结果
+│   ├── explore.ipynb # 探索性分析
+│   ├── model.py # 总入口
+│   └── preprocess.py # 平稳处理
+├── readme.md # 本说明文档
+├── result # 生成的结果文件
+│   ├── mse_False.csv # mse得分结果，False表示不加平稳
+│   ├── mse_True.csv # mse得分结果，True表示加平稳
+│   ├── pics # 所有图片结果文件
+│   │   ├── Decomposition/ # 做季节性分解的图片结果
+│   │   ├── Diffed/ # 做一阶差分平稳的图片结果
+│   │   └── Predict/ # 预测效果图片
+│   └── pred/ # 预测结果，False表示不加平稳，True表示加
 └── util（辅助功能）
     └── log.py
 ```
@@ -107,7 +83,7 @@ $$
 
 #### **（1）Conformal Anomaly Detector算法实现 `conformal_anomaly_detector.py`**
 
-代码中字母表示与4.1原理一致。实现细节上，我们使用knn计算邻居是借助sklearn.neighbors._ball_tree中的BallTree，因为我们L选的数字一般较大，超过20，而L也就是向量的维度，所以knn要处理的是高维向量。那么，结合已掌握的知识，为了效果和速度，用球树合适快速求出邻居。
+代码中字母表示与1原理一致。实现细节上，我们使用knn计算邻居是借助sklearn.neighbors._ball_tree中的BallTree，因为我们L选的数字一般较大，超过20，而L也就是向量的维度，所以knn要处理的是高维向量。那么，结合已掌握的知识，为了效果和速度，用球树合适快速求出邻居。
 
 ```python
 class Conformal(object):
